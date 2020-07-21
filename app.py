@@ -46,7 +46,9 @@ def update_data():
     if session.get('high_score'):
         if session['high_score']<score:
             session['high_score']=score
+            return "New High Score!"
     else: 
         session['high_score']=score
+        return "New High Score!"
         #Why won't this redirect? 
     return redirect('/')

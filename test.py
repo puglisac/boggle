@@ -37,6 +37,6 @@ class FlaskTests(TestCase):
         with app.test_client() as client:
             with client.session_transaction() as session:
                 session['high_score']='10'
-                resp = client.post('/end', data={'score', '20'})
+                resp = client.post('/end', data={'score': '20'})
                 self.asserEqual(session['high_score'], 20)
                 

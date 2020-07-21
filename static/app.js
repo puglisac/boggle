@@ -19,7 +19,7 @@ async function checkWord(guess) {
     }
     //alert and return if the word has already been found
     if (foundWords.has(guess)) {
-        alert(`${guess} has already been found`);
+        showMessage(`${guess} has already been found`);
         return;
     }
 
@@ -34,9 +34,9 @@ async function checkWord(guess) {
         addScore(guess.length);
         console.log(foundWords);
     } else if (resp.data == "not-on-board") {
-        alert(`${guess} is not on this board`);
+        showMessage(`${guess} is not on this board`);
     } else if (resp.data == "not-word") {
-        alert(`${guess} is not a word`);
+        showMessage(`${guess} is not a word`);
     }
 }
 
@@ -76,13 +76,22 @@ function showTimer(sec) {
 async function endGame() {
     $("#timer").empty();
     $guess.empty();
-    alert("Game Over");
+    showMessage("Game Over");
     restart();
-    await axios.post("/end", { params: { score } });
+    resp = await axios.post("/end", { params: { score } });
+    console.log(resp.data)
+    if (resp.data == "New High Score!") {
+        showMessage(`New High Score: ${score}`)
+    }
 
 
 }
 
 function restart() {
     $("#timer").append("<div class='text-right'><a href= '/'> <button class = 'btn'> Replay </button> </a></div> ");
+}
+
+function showMessage(msg) {
+    $("#msg").empty();
+    $("#msg").append(`<h3>${msg}</h3>`);
 }
