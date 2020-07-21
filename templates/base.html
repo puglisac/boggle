@@ -6,19 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boggle</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/static/app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&display=swap" rel="stylesheet">
 </head>
 <header id="title">
-    <h1>Boggle</h1>
+    <h1 class="text-center">Boggle</h1>
 </header>
 
-<body>
+<body class="p-2">
     {%if session['high_score']%}
-    <p id="high-score">High Score: {{session['high_score']}}</p>
+    <p class="text-right" id="high-score">High Score: {{session['high_score']}}</p>
     {%endif%} {%if session['played']%}
-    <p id="played">Times Played: {{session['played']}}</p>
+    <p class="text-right" id="played">Times Played: {{session['played']}}</p>
     {%endif%}
     <div id="timer"></div>
-    <div id="game-container" class="container">
+    <div id="game-container" class="text-center d-flex justify-content-center container">
 
         {%block game_table%} {%endblock%} {%block form%} {%endblock%} {%block words%}{%endblock%}
     </div>

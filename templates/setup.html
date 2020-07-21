@@ -1,5 +1,8 @@
 {%extends "base.html"%} {%block form%}
 <form id="setup" action="/game">
-    <label for="size">Enter a number to create the size of the board</label>
-    <input id="size" name="size" type="number">
-    <input type="submit"></form>{%endblock%}
+    <div class="row justify-content-center">
+        <label class="col-12" for="size">How many rows?</label>
+        <input class="col-2 input-group-text m-2" id="size" name="size" type="number">
+        <input class="col-2 btn m-2" type="submit"></form>
+</div>
+{%endblock%}

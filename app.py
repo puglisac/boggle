@@ -27,13 +27,15 @@ def check_word():
     """check if submission is a valid word"""
     word = request.args["word"]
     board = session["board"]
-    resp = boggle_game.check_valid_word(board, word)
+    size=len(board);
+    resp = boggle_game.check_valid_word(board, word, size)
+    print("resp: ", resp)
     return jsonify(resp)
 
 @app.route('/end', methods=["POST"])
 def update_data():
+    """updates the session data for high score and times played"""
     score= int(request.json['params']['score'])
-    print("score= ", score)
     if session.get('played'):
         played = session['played']
         played+=1
@@ -45,6 +47,6 @@ def update_data():
         if session['high_score']<score:
             session['high_score']=score
     else: 
-        session['high_score']=score        
-    print("from session: ", session.get('played'), session.get('high_score'))
+        session['high_score']=score
+        #Why won't this redirect? 
     return redirect('/')

@@ -45,7 +45,7 @@ async function checkWord(guess) {
 function displayWords(words) {
     $("#found-words").empty();
     for (word of words) {
-        $("#found-words").append(`<div>${word}</div>`);
+        $("#found-words").append(`<div class="col-6">${word}</div>`);
     }
 }
 
@@ -57,7 +57,7 @@ function addScore(num) {
     $("#score").append(`<span>Score: ${score}</span>`);
 }
 
-function timer(sec = 60) {
+function timer(sec = 4) {
     countDown = setInterval(() => {
         sec -= 1;
         if (sec == 0) {
@@ -77,5 +77,12 @@ async function endGame() {
     $("#timer").empty();
     $guess.empty();
     alert("Game Over");
+    restart();
     await axios.post("/end", { params: { score } });
+
+
+}
+
+function restart() {
+    $("#timer").append("<div class='text-right'><a href= '/'> <button class = 'btn'> Replay </button> </a></div> ");
 }

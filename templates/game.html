@@ -1,17 +1,22 @@
 {%extends "base.html"%} {%block game_table%} {%for row in board%}
-<div class="row">{%for cell in row%}
-    <div class="letter-cell col">{{cell}}</div>
-    {%endfor%}
-</div>{%endfor%} {%endblock%} {%block form%}
-<form id="input-form">
-    <input type="text">
-    <input type="submit">
-</form>
+
+<div id="boggle-game">
+    <div class="row justify-content-center">{%for cell in row%}
+        <div class="letter-cell col">{{cell}}</div>
+        {%endfor%}
+    </div>{%endfor%} {%endblock%} {%block form%}
+    <form class="row justify-content-center" id="input-form">
+        <input class="input-group-text m-2 col-6" type="text">
+        <input class="col-3 btn m-2" type="submit">
+    </form>
+
+</div>
+
 {%endblock%} {%block words%}
 <div id="score"> </div>
 <h2>Found Words</h2>
 
-<div id="found-words">
+<div class="row" id="found-words">
 
 
 </div>

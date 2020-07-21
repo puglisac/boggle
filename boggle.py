@@ -28,11 +28,11 @@ class Boggle():
 
         return board
 
-    def check_valid_word(self, board, word):
+    def check_valid_word(self, board, word, size):
         """Check if a word is a valid word in the dictionary and/or the boggle board"""
 
         word_exists = word in self.words
-        valid_word = self.find(board, word.upper())
+        valid_word = self.find(board, word.upper(), size)
 
         if word_exists and valid_word:
             result = "ok"
@@ -43,10 +43,10 @@ class Boggle():
 
         return result
 
-    def find_from(self, board, word, y, x, seen):
+    def find_from(self, board, word, y, x, size, seen):
         """Can we find a word on board, starting at x, y?"""
 
-        if x > 4 or y > 4:
+        if x > size-1 or y > size-1:
             return
 
         # This is called recursively to find smaller and smaller words
@@ -92,50 +92,50 @@ class Boggle():
         # adding diagonals
 
         if y > 0:
-            if self.find_from(board, word[1:], y - 1, x, seen):
+            if self.find_from(board, word[1:], y - 1, x, size, seen):
                 return True
 
-        if y < 4:
-            if self.find_from(board, word[1:], y + 1, x, seen):
+        if y < size-1:
+            if self.find_from(board, word[1:], y + 1, x, size, seen):
                 return True
 
         if x > 0:
-            if self.find_from(board, word[1:], y, x - 1, seen):
+            if self.find_from(board, word[1:], y, x - 1, size, seen):
                 return True
 
-        if x < 4:
-            if self.find_from(board, word[1:], y, x + 1, seen):
+        if x < size-1:
+            if self.find_from(board, word[1:], y, x + 1, size, seen):
                 return True
 
         # diagonals
         if y > 0 and x > 0:
-            if self.find_from(board, word[1:], y - 1, x - 1, seen):
+            if self.find_from(board, word[1:], y - 1, x - 1, size, seen):
                 return True
 
-        if y < 4 and x < 4:
-            if self.find_from(board, word[1:], y + 1, x + 1, seen):
+        if y < size-1 and x < size-1:
+            if self.find_from(board, word[1:], y + 1, x + 1, size, seen):
                 return True
 
-        if x > 0 and y < 4:
-            if self.find_from(board, word[1:], y + 1, x - 1, seen):
+        if x > 0 and y < size-1:
+            if self.find_from(board, word[1:], y + 1, x - 1, size, seen):
                 return True
 
-        if x < 4 and y > 0:
-            if self.find_from(board, word[1:], y - 1, x + 1, seen):
+        if x < size-1 and y > 0:
+            if self.find_from(board, word[1:], y - 1, x + 1, size, seen):
                 return True
         # Couldn't find the next letter, so this path is dead
 
         return False
 
-    def find(self, board, word):
+    def find(self, board, word, size):
         """Can word be found in board?"""
 
         # Find starting letter --- try every spot on board and,
         # win fast, should we find the word at that place.
 
-        for y in range(0, 5):
-            for x in range(0, 5):
-                if self.find_from(board, word, y, x, seen=set()):
+        for y in range(0, size):
+            for x in range(0, size):
+                if self.find_from(board, word, y, x, size, seen=set()):
                     return True
 
         # We've tried every path from every starting square w/o luck.
