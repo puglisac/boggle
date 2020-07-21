@@ -57,7 +57,7 @@ function addScore(num) {
     $("#score").append(`<span>Score: ${score}</span>`);
 }
 
-function timer(sec = 4) {
+function timer(sec = 60) {
     countDown = setInterval(() => {
         sec -= 1;
         if (sec == 0) {
