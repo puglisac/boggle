@@ -7,8 +7,17 @@
     <title>Boggle</title>
     <link rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
 </head>
+<header id="title">
+    <h1>Boggle</h1>
+</header>
 
 <body>
+    {%if session['high_score']%}
+    <p id="high-score">High Score: {{session['high_score']}}</p>
+    {%endif%} {%if session['played']%}
+    <p id="played">Times Played: {{session['played']}}</p>
+    {%endif%}
+    <div id="timer"></div>
     <div id="game-container" class="container">
 
         {%block game_table%} {%endblock%} {%block form%} {%endblock%} {%block words%}{%endblock%}
@@ -17,7 +26,7 @@
     <script src="https://unpkg.com/popper"></script>
     <script src="https://unpkg.com/bootstrap"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
-    <script src="static/app.js"></script>
+    {%block script%}{%endblock%}
 </body>
 
 </html>
