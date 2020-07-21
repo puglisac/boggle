@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+
+{%block game_table%} 
+ {%for row in board%}
+<div class="row">{%for cell in row%}
+    <div class="letter-cell col">{{cell}}</div> 
+    {%endfor%}
+</div>{%endfor%} 
+{%endblock%}
+ 
+{%block form%}
+<form id="input-form">
+    <input type="text">
+    <input type="submit">
+</form>
+{%endblock%}
+{%block words%}
+<div id="score"> </div>
+<h2>Found Words</h2>
+
+<div id="found-words">
+    
+    
+</div>
+{%endblock%}
