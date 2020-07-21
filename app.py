@@ -3,7 +3,7 @@ from flask import Flask, request, session, render_template, jsonify, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "oh-so-secret"
+app.config['SECRET_KEY'] = "847390-24"
 
 debug = DebugToolbarExtension(app)
 
