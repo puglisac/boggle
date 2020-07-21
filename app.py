@@ -31,14 +31,13 @@ def check_word():
     board = session["board"]
     size = len(board)
     resp = boggle_game.check_valid_word(board, word, size)
-    print("resp: ", resp)
     return jsonify(resp)
 
 
 @app.route('/end', methods=["POST"])
 def update_data():
     """updates the session data for high score and times played"""
-    score = int(request.json['params']['score'])
+    score = int(request.json['data']['score'])
     if session.get('played'):
         played = session['played']
         played += 1

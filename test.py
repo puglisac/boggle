@@ -1,6 +1,6 @@
 from unittest import TestCase
 from app import app
-from flask import session, jsonify
+from flask import session
 from boggle import Boggle
 
 
@@ -19,7 +19,6 @@ class FlaskTests(TestCase):
         with app.test_client() as client:
             resp = client.get('/game?size=4')
             html = resp.get_data(as_text=True)
-
             self.assertEqual(resp.status_code, 200)
             self.assertIn('<h2>Found Words</h2>', html)
             self.assertEquals(len(session['board']), 4)
@@ -40,5 +39,5 @@ class FlaskTests(TestCase):
         with app.test_client() as client:
             with client.session_transaction() as session:
                 session['high_score'] = '10'
-                resp = client.post('/end', data={"score": "20"})
-                self.assertEqual(resp, "New High Score!")
+            client.post('/end', data={"score": 20})
+            self.assertEqual(session['high_score'], 20)

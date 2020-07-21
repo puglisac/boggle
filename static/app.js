@@ -31,7 +31,6 @@ async function checkWord(guess) {
 		foundWords.add(guess);
 		displayWords(foundWords);
 		addScore(guess.length);
-		console.log(foundWords);
 	} else if (resp.data == "not-on-board") {
 		showMessage(`${guess} is not on this board`);
 	} else if (resp.data == "not-word") {
@@ -72,9 +71,9 @@ function showTimer(sec) {
 async function endGame() {
 	$("#timer").empty();
 	$guess.empty();
-	showMessage("Game Over");
+	alert("Game Over");
 	restart();
-	resp = await axios.post("/end", { params: { score } });
+	resp = await axios.post("/end", { data: { score } });
 	if (resp.data == "New High Score!") {
 		showMessage(`New High Score: ${score}`);
 	}
