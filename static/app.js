@@ -1,13 +1,13 @@
-Class BoardGame() {
+class BoardGame() {
 
     constructor() {
-            $guess = $("#input-form");
-            const foundWords = new Set();
-            let score = 0;
-            timer();
+            this.$guess = $("#input-form");
+            const this.foundWords = new Set();
+            let this.score = 0;
+            this.timer();
 
             //handle the submit event
-            $guess.on("submit", function(evt) {
+            this.$guess.on("submit", function(evt) {
                 evt.preventDefault();
                 $("#msg").empty();
                 checkWord($(evt.target[0]).val());
@@ -22,8 +22,8 @@ Class BoardGame() {
             return;
         }
         //alert and return if the word has already been found
-        if (foundWords.has(guess)) {
-            showMessage(`${guess} has already been found`);
+        if (this.foundWords.has(guess)) {
+            this.showMessage(`${guess} has already been found`);
             return;
         }
 
