@@ -1,6 +1,6 @@
 from unittest import TestCase
 from app import app
-from flask import session
+from flask import session, jsonify
 from boggle import Boggle
 
 
@@ -37,7 +37,13 @@ class FlaskTests(TestCase):
     def test_end(self):
         # how to setup this test?
         with app.test_client() as client:
-            with client.session_transaction() as session:
-                session['high_score'] = '10'
-            client.post('/end', data={"score": 20})
+            with client.session_transaction() as change_session:
+                change_session['high_score'] = 10
+                change_session['played']=2
+            resp=client.post('/end', json={"data": {"score": 20}})
             self.assertEqual(session['high_score'], 20)
+            self.assertEqual(session['played'], 3)
+
+            client.post('/end', json={"data": {"score": 5}})
+            self.assertEqual(session['high_score'], 20)
+            self.assertEqual(session['played'], 4)

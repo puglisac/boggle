@@ -12,6 +12,7 @@ boggle_game = Boggle()
 
 @app.route("/")
 def setup_board():
+    """start page to choose size of board"""
     return render_template('setup.html')
 
 
@@ -52,4 +53,4 @@ def update_data():
     else:
         session['high_score'] = score
         return "New High Score!"
-    return
+    return "Not a High Score"
