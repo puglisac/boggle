@@ -1,18 +1,18 @@
 class BoardGame() {
 
     constructor() {
-            this.$guess = $("#input-form");
-            const this.foundWords = new Set();
-            let this.score = 0;
-            this.timer();
+        this.$guess = $("#input-form");
+        const this.foundWords = new Set();
+        let this.score = 0;
+        this.timer();
+        this.$guess.on("submit", this.handleClick.bind(this))
 
-            //handle the submit event
-            this.$guess.on("submit", function(evt) {
-                evt.preventDefault();
-                $("#msg").empty();
-                checkWord($(evt.target[0]).val());
-                $(evt.target[0]).val("");
-            });
+    }
+    handleClick(evt) {
+            evt.preventDefault();
+            console.log(this)
+            this.checkWord($(evt.target[0]).val());
+            $(evt.target[0]).val("");
         }
         //checks if the submitted word is a valid word
     async checkWord(guess) {
