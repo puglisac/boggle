@@ -1,16 +1,16 @@
-class BoardGame() {
+class BoardGame {
 
     constructor() {
         this.$guess = $("#input-form");
-        const this.foundWords = new Set();
-        let this.score = 0;
+        this.foundWords = new Set();
+        this.score = 0;
         this.timer();
-        this.$guess.on("submit", this.handleClick.bind(this))
+        this.$guess.on("submit", this.handleClick.bind(this));
 
     }
     handleClick(evt) {
             evt.preventDefault();
-            console.log(this)
+            console.log(this);
             this.checkWord($(evt.target[0]).val());
             $(evt.target[0]).val("");
         }
@@ -28,43 +28,43 @@ class BoardGame() {
         }
 
         //request to the server to check if valid word
-        let resp = await axios.get("/check", { params: { word: guess } });
+        const resp = await axios.get("/check", { params: { word: guess } });
 
         //handles response from the server
         if (resp.data == "ok") {
-            foundWords.add(guess);
-            displayWords(foundWords);
-            addScore(guess.length);
+            this.foundWords.add(guess);
+            this.displayWords(this.foundWords);
+            this.addScore(guess.length);
         } else if (resp.data == "not-on-board") {
-            showMessage(`${guess} is not on this board`);
+            this.showMessage(`${guess} is not on this board`);
         } else if (resp.data == "not-word") {
-            showMessage(`${guess} is not a word`);
+            this.showMessage(`${guess} is not a word`);
         }
     }
 
     //displays the found words on the page
     displayWords(words) {
         $("#found-words").empty();
-        for (word of words) {
-            $("#found-words").append(`<div class="col-6">${word}</div>`);
+        for (this.word of words) {
+            $("#found-words").append(`<div class="col-6">${this.word}</div>`);
         }
     }
 
     //displays the score
     addScore(num) {
-        score += num;
+        this.score += num;
         $("#score").empty();
-        $("#score").append(`<span>Score: ${score}</span>`);
+        $("#score").append(`<span>Score: ${this.score}</span>`);
     }
 
     timer(sec = 60) {
         //a countdown timer that starts when the page loads
-        countDown = setInterval(() => {
+        const countDown = setInterval(() => {
             sec -= 1;
             if (sec == 0) {
                 clearInterval(countDown);
-                endGame();
-            } else showTimer(sec);
+                this.endGame();
+            } else this.showTimer(sec);
         }, 1000);
     }
 
@@ -77,13 +77,14 @@ class BoardGame() {
     async endGame() {
 
         //updates the high score and times played on the back end
+        const score = this.score
         $("#timer").empty();
-        $guess.empty();
+        this.$guess.empty();
         alert("Game Over");
-        restart();
-        resp = await axios.post("/end", { data: { score } });
+        this.restart();
+        const resp = await axios.post("/end", { data: { score } });
         if (resp.data == "New High Score!") {
-            showMessage(`New High Score: ${score}`);
+            this.showMessage(`New High Score: ${score}`);
         }
     }
 
