@@ -16,9 +16,9 @@ At the end of the game if your score will be checked against the current high-sc
 
 ## Built Using  
 
-Flask - framework
-Python - Back-end and game logic
-Bootstrap - styling
-JavaScript - DOM manipulation and UI
+Flask - framework  
+Python - Back-end and game logic  
+Bootstrap - styling  
+JavaScript - DOM manipulation and UI  
 
 
